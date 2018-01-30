@@ -2,6 +2,13 @@
 
 ## PWN
 
+- 32bit frame
+
+  - gcc -m32
+
+- protect
+  
+  - gcc -fno-stack-protector file.c(關閉canary)
 
 - gdb調用技巧
 
