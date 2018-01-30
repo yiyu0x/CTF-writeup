@@ -5,19 +5,19 @@
 
 - gdb調用技巧
 
- - disas main
+  - disas main
 
- - info func
+  - info func
  
- - x $ebp+8
+  - x $ebp+8
 
 - pwntools
  
- - OFFSET  
+  - OFFSET  
 
-	 - cyclib(50)
+    - cyclib(50)
  
-	 - cyclib_find('aa') 
+    - cyclib_find('aa') 
 
 ```python
 from pwn import *
