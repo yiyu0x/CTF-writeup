@@ -151,14 +151,14 @@ print出來的字串是`O:10:"MyFirstCTF":1:{s:4:"test";s:3:";ls";}`
 
 解答
 
-:::
-這段很重要 不同類型序列化的值不一樣 但是看起來沒差 以protected 因為是null byte 所以要自己加 '\00*\00' 長度多3
+文章重點
 
+不同類型變數序列化的值不一樣 但是看起來沒差 以protected 因為是null byte 所以要自己加 '\00*\00' 長度多3
+```
 private的参数被反序列化后变成 \00test\00test1 
 public的参数变成 test2   p
 rotected的参数变成 \00*\00test3 
-:::
+```
 
-
-### 0x03 (math)
-### 0x04 (math)
+### 0x03 (SSTI)
+### 0x04 (XXE)
