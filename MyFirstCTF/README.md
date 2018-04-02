@@ -94,3 +94,24 @@ print(r.recvline())
 ```
 
 ## Web
+
+### 0x01 (session)
+
+用brup抓包
+
+觀察提示的使用者 clara 的封包
+
+=PZge c JryZ l TvNv a Fbgs r eBYt a
+
+只是使用者名稱混雜一些字元
+
+於是把clara的部分admin即可
+
+改完後 `=PZgeaJryZdTvNvmFbgsieBYtn`
+
+requestt出去就拿到flag了
+
+### 0x02 (serialize)
+
+### 0x03 (math)
+### 0x04 (math)
