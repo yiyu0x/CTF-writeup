@@ -43,6 +43,12 @@ group_concat(table_name)/*1*/frofromm/*1*/information_schema.tables/*1*/where/*1
 
 ## PWN
 
+### asm intel
+
+參數存入rigister順序 `printf(rdi,rsi,rdx,rcx,r8,r9)`
+
+### pwnalbe
+
 - 32bit frame
 
   - gcc -m32
