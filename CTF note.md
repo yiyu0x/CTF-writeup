@@ -33,6 +33,11 @@ group_concat(table_name)/*1*/frofromm/*1*/information_schema.tables/*1*/where/*1
 
 > ?page=`php://filter/read=convert.base64-encode/resource=path`
 
+### command injection
+
+**串接指令** : `反引號` , `&&` , `|` , `;`
+
+**讀取檔案** : `cat` , `head` , `tail` , `sort` , `more`
 
 ## PWN
 
