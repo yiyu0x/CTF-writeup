@@ -39,6 +39,8 @@ group_concat(table_name)/*1*/frofromm/*1*/information_schema.tables/*1*/where/*1
 
 **讀取檔案** : `cat` , `head` , `tail` , `sort` , `more`
 
+**檔名被過濾** : 萬用字元繞過 (ex:flag.txt --> `cat fla*`)
+
 ## PWN
 
 - 32bit frame
