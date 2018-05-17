@@ -47,6 +47,8 @@ group_concat(table_name)/*1*/frofromm/*1*/information_schema.tables/*1*/where/*1
 
 參數存入rigister順序 `printf(rdi,rsi,rdx,rcx,r8,r9)`
 
+[ref](http://abcdxyzk.github.io/blog/2012/11/23/assembly-args/)
+
 ### pwnalbe
 
 - 32bit frame
