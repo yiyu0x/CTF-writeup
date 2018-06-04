@@ -46,6 +46,10 @@ argv[1]的長度要等於20bytes才能通過檢查
 
 568134120 + 4 = 568134124
 
+```
+./col `python -c "print '\x7a\x42\x77\x08'*4 + '\x04\x00\x00\x00' "`
+```
+
 乍看起來很合理 但是一直沒成功
 
 查了才知道 4 的 hex 0x4 在丟的過程 (\x04\x00\x00\x00) 會被截斷 (\x00是截斷符號！)
@@ -54,8 +58,9 @@ argv[1]的長度要等於20bytes才能通過檢查
 
 0x21DD09EC - 0x01010101*4 = 0x1dd905e8
 
-0x1dd905e8 + 0x01010101*4 --> 轉little endian --> `\xe8\x05\xd9x\1d` + `\x01\x01\x01\x01`*4
+0x1dd905e8 + 0x01010101*4 --> 轉little endian --> '\xe8\x05\xd9x\1d' + '\x01\x01\x01\x01'*4
 
-`./col `python -c "print '\xe8\x05\xd9\x1d' + '\x01\x01\x01\x01'*4" ``
-
+```
+./col `python -c "print '\xe8\x05\xd9\x1d' + '\x01\x01\x01\x01'*4" `
+```
 使用這種方式塞payload時要注要系統python的版本，print的用法不同
