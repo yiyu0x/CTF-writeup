@@ -25,4 +25,4 @@ int main(int argc, char* argv[], char* envp[]){
 
 fd拿來控制read的模式([file descripter](https://en.wikipedia.org/wiki/File_descriptor))
 
-讓fd等於0就可以讓read那邊從stdin讀入東西了
+讓fd等於0就可以讓read從stdin讀入東西了
