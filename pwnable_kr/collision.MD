@@ -52,7 +52,7 @@ argv[1]的長度要等於20bytes才能通過檢查
 
 乍看起來很合理 但是一直沒成功
 
-查了才知道 4 的 hex 0x4 在丟的過程 (\x04\x00\x00\x00) 會被截斷 (\x00是截斷符號！)
+查了才知道 4 的 hex 0x4 在丟的過程 (\x04\x00\x00\x00) 會被截斷 (\x00是截斷符號！) [stack_overflow](https://stackoverflow.com/questions/2547349/what-does-x-mean-in-c-c)
 
 所以重新湊了一下
 
