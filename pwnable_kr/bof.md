@@ -39,7 +39,7 @@ code看一下就知道要想辦法利用overflowme去蓋key，蓋成0xcafebabe
 gdb-peda$ p $ebp+0x8
 $1 = (void *) 0xffffd5e0
 ```
-繼續執行會執行 
+繼續會執行 
 
 ```
 0x5655564f <func+35>:        call   0xf7e6f890 <gets>
