@@ -36,11 +36,11 @@ int main(){
 }
 ```
 
-login()裡面的`scanf("%d", passcode1);`沒有用`&`字號
+login()裡面的`scanf("%d", passcode1)`沒有用`&`字號 (執行時會把值存到裡面 所以我們可以構造記憶體位置塞在passcode1)
 
 然後passcode1跟name的位置差96bytes
 
-所以我們可以把4bytes位置塞到passcode1裡面
+所以我們可以把4bytes位置塞到passcode1裡面 (scanf執行時會把值存到裡面 所以我們可以構造記憶體位置塞在passcode1中)
 
 然後在scanf那邊在輸入我們要的值
 
