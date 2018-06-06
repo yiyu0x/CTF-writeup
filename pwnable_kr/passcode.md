@@ -36,7 +36,7 @@ int main(){
 }
 ```
 
-login()裡面的`scanf("%d", passcode1)`沒有用`&`字號 (執行時會把值存到裡面 所以我們可以構造記憶體位置塞在passcode1)
+login()裡面的`scanf("%d", passcode1)`沒有用`&`字號 
 
 然後passcode1跟name的位置差96bytes
 
