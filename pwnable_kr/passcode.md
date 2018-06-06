@@ -38,7 +38,7 @@ int main(){
 
 login()裡面的`scanf("%d", passcode1)`沒有用`&`字號 
 
-然後passcode1跟name的位置差96bytes
+然後passcode1跟name的位置差96bytes (且welcome(),login()的ebp位置相同)
 
 所以我們可以把4bytes位置塞到passcode1裡面 (scanf執行時會把值存到裡面 所以我們可以構造記憶體位置塞在passcode1中)
 
@@ -47,6 +47,10 @@ login()裡面的`scanf("%d", passcode1)`沒有用`&`字號
 於是把頭腦動到`fflush(stdin)`的GOT位置(0x0804a000)
 
 然後在scanf那邊輸入`system("/bin/cat flag")`的指令位置(0x080485E3)
+
+![](https://i.imgur.com/UZCoEHC.png)
+
+tips : 找system("/bin/cat flag")位置時要找`mov /bin/cat flag`那行 這樣system執行時才有參數
 
 exploit: 
 ```python
