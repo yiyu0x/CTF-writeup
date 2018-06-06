@@ -38,7 +38,7 @@ int main(){
 
 login()裡面的`scanf("%d", passcode1)`沒有用`&`字號 
 
-然後passcode1跟name的位置差96bytes (且welcome(),login()的ebp位置相同)
+然後passcode1跟name的位置差96bytes (且welcome(),login()的ebp位置相同 所以才能這麼做)
 
 所以我們可以把4bytes位置塞到passcode1裡面 (scanf執行時會把值存到裡面 所以我們可以構造記憶體位置塞在passcode1中)
 
