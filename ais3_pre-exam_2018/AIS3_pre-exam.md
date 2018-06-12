@@ -303,7 +303,7 @@ Decode -X file.mp3
 
 proof of work
 
-[挖礦挖起來](http://book.8btc.com/books/1/master_bitcoin/_book/8/8.html)
+[挖矿与共识](http://book.8btc.com/books/1/master_bitcoin/_book/8/8.html)
 
 裡面範例code改一改勉強能動
 
