@@ -49,6 +49,10 @@ group_concat(table_name)/*1*/frofromm/*1*/information_schema.tables/*1*/where/*1
 
 [ref](http://abcdxyzk.github.io/blog/2012/11/23/assembly-args/)
 
+### reverse
+
+- objump -d -M intel filename
+
 ### pwnalbe
 
 - 32bit frame
