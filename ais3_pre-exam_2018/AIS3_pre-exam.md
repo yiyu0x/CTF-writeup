@@ -74,6 +74,17 @@ AIS3{NOT_A_VALID_FLAG}
 
 ### sushi
 
+```php
+<?php
+highlight_file(__FILE__);
+$_ = $_GET['🍣'];
+
+if( strpos($_, '"') || strpos($_, "'") )
+    die('Bad Hacker :(');
+eval('die("' . substr($_, 0, 16) . '");');
+?>
+
+```
 題目 [link](http://104.199.235.135:31333/)
 
 前面兩個過濾用url encode就繞得過
@@ -108,6 +119,16 @@ phpinfo.php
 > http://104.199.235.135:31333/flag_name_1s_t00_l0ng_QAQQQQQQ
 
 有時候把事情想的太複雜 少給自己太多方向QQ
+
+法二
+
+
+
+".\`ls\`."
+
+
+
+原因是"的位置在0 所以if那邊不會跳進去
 
 ### perljam
 
