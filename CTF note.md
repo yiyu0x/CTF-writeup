@@ -89,3 +89,4 @@ r = remote('pwnable.kr',9000)
 r.send(playload)
 r.interactive()
 ```
+w
