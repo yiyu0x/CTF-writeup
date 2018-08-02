@@ -2,7 +2,7 @@
 
 ## CDN繞過
 
-題目 [https://realme.0x61697333.cf](https://realme.0x61697333.cf)
+題目 [https://realme.0x61697333.cf](http://realme.0x61697333.cf)
 
 要繞過CDN 先用[virustotal](https://www.virustotal.com/zh-tw/)掃一下domain
 
