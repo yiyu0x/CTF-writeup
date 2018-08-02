@@ -40,7 +40,7 @@
 > file:///meow/ais3/index.php
 
 ## 10
-[SSRF 11](http://ssrf01.0x61697333.cf/index.php)
+[SSRF 10](http://ssrf01.0x61697333.cf/index.php)
 
 ip有基本檢查 要繞一下
 
