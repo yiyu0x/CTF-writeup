@@ -45,6 +45,23 @@ group_concat(table_name)/*1*/frofromm/*1*/information_schema.tables/*1*/where/*1
 
 查看GOT : `readelf -a <filename>`
 
+x86 64位元 calling convention
+
+a(1,2,3,4,5,6,7,8,9)
+
+```
+136   4004f5:   6a 09                   push   0x9
+137   4004f7:   6a 08                   push   0x8
+138   4004f9:   6a 07                   push   0x7
+139   4004fb:   41 b9 06 00 00 00       mov    r9d,0x6
+140   400501:   41 b8 05 00 00 00       mov    r8d,0x5
+141   400507:   b9 04 00 00 00          mov    ecx,0x4
+142   40050c:   ba 03 00 00 00          mov    edx,0x3
+143   400511:   be 02 00 00 00          mov    esi,0x2
+144   400516:   bf 01 00 00 00          mov    edi,0x1
+```
+
+
 ### asm intel
 
 參數存入rigister順序 `printf(rdi,rsi,rdx,rcx,r8,r9)`
