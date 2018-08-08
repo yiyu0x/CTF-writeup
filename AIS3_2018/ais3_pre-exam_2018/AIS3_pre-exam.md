@@ -241,6 +241,8 @@ printf的ret address 然後把值蓋成shell function的記憶體位置
     }
     printf("Are you sure ? (yes:1 / no:0) ");//ret --> 0x7fffffffe2c8
     
+    //ret --> 0x7fffffffe2c8 --> 這個位置可以追進去printf@plt 然後馬上看stack頂層
+    
 ```
     //0x7fffffffe2f0 - 0x7fffffffe2c8 = 40
     //64-bits --> 40/8 = 5
