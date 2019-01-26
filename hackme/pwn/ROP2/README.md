@@ -63,7 +63,7 @@ p.sendlineafter(':', payload)
 p.interactive()
 ```
 
-以下提供一個ROP利用方法 丟參數順序 ebp edi esi ebx
+以下提供一個ROP利用方法 找出連續四次 pop
 
 exp.py
 ```python
